@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Unix/Linux Administration</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../reveal.js/css/reveal.min.css">
+		<link rel="stylesheet" href="../reveal.js/css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Unix/Linux Administrations</h1>
+					<h3>“Linux: the operating system with a CLUE… Command Line User Environment”</h3>
+					<p>
+						<small>Created by <a href="http://hakim.se">Narayanaperumal Gurusamy</a> / <a href="http://twitter.com/gnperumal">@gnperumal</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Unix System Administration</h2>
+					<h3>Unit 1:</h3>
+					<ul>
+						<li>Linux OS structure</li>
+						<li>Hardware inventory</li>
+						<li>Disks and partitions</li>
+						<li>Installation steps</li>
+						<li>Boot loader</li>	
+					</ul>
+				</section>
+				<section>
+					<h2>Linux Distribution</h2>
+					<img src="img/ld.png">
+				</section>
+				<section>
+					<h2>Popular Linux Distributions</h2>
+					    <ul>
+							<li>Redhat</li>
+							<li>Fedora</li>
+							<li>Suse</li>
+							<li>Debian</li>
+							<li>Ubuntu</li>
+							<li>Mandriva</li>
+							<li>Gentoo</li>
+							<li>Slackware</li>
+						</ul>
+				</section>
+				<section>
+					<h2>Useful Hardware Information for Installing Linux</h2>
+					    <table>
+					    	<tr>
+					    		<td>Processor</td>
+					    		<td>Pentium III 1Ghz</td>
+					    	</tr>
+					    	<tr>
+					    		<td>Memory</td>
+					    		<td>512 MB</td>
+					    	</tr>
+					    	<tr>
+					    		<td>Hard Disk</td>
+					    		<td>40 GB</td>
+					    	</tr>
+					    	<tr>
+					    		<td>Video Card</td>
+					    		<td>Intel/AMD/Nvidia</td>
+					    	</tr>
+					    	<tr>
+					    		<td>Network Card</td>
+					    		<td>Intel/Broadcom</td>
+					    	</tr>
+					    </table>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>Overview of Linux Installation</h2>
+						<ul>
+							<li>Installation is started by booting from</li>
+							<ul>
+								<li>floppy disk, CD</li>
+								<li>other bootable device: network, USB</li>
+							</ul>
+							<li>Installation tasks:</li>
+							<ul>
+								<li>identify source of the Linux files</li>
+								<li>answer miscellaneous questions</li>
+								<li>identify target partition(s)</li>
+								<li>define what software to install and configure</li>
+								<li>configure boot loader</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h2>Installation sources</h2>
+						<ul>
+							<li>CD-ROM</li>
+							<li>Hard disk</li>
+							<li>Floppy disk, USB device</li>
+							<li>Network installation</li>
+							<ul>
+								<li>ftp</li>
+								<li>http</li>
+								<li>nfs</li>
+								<li>PXE Environment</li>
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h2>Answer Questions</h2>
+						<ul>
+							<li>language</li>
+							<li>keyboard</li>
+							<li>time zone</li>
+							<li>superuser password</li>
+							<li>network setup</li>
+							<li>initial firewall configuration</li>
+							<li>create initial user(s)</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Identify Target Partitions</h2>
+					<img src="img/format.png">
+				</section>
+				<section>
+					<h2>Preparing Hard Disk Partitions</h2>
+					<ul>
+						<li>physical vs. logical</li>
+						<ul>
+							<li>IDE disks: /dev/hda  /dev/hdb</li>
+							<ul>
+								<li>partitions numbered starting with 1</li>
+								<li>example: /dev/hda1</li>
+							</ul>
+							<li>SCSI disks: /dev/sda</li>
+						</ul>
+						<li>file system vs. swap space</li>
+						<ul>
+							<li>file system type</li>
+							<li>mount point</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+					<h2>Some Target Partitions</h2>
+					<ul>
+						<li>/</li>
+						<ul>
+							<li>root file system</li>
+						</ul>
+						<li>optional: /boot</li>
+						<ul>
+							<li>for boot specific files</li>
+						</ul>
+						<li>swap space</li>
+						<ul>
+							<li>enables virtual memory</li>
+						</ul>
+						<li>/home</li>
+						<ul>
+							<li>users’ home directories</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+					<h2>Select Installation Type</h2>
+					<ul>
+						<li>personal desktop</li>
+						<li>workstation</li>
+						<li>server</li>
+						<li>custom</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Select Software Packages</h2>
+					<ul>
+						<li>GUI: X11, Gnome, KDE, lxde</li>
+						<li>editors</li>
+						<li>internet browsers and utilities</li>
+						<li>web server and utilities</li>
+						<li>developers tools</li>
+						<li>...</li>
+						<li>optional: everything</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Configuring the Boot Manager</h2>
+					<img src="img/part.png">
+				</section>
+				<section>
+					<h2>Boot Manager: LILO (<strong>LI</strong>nux <strong>LO</strong>ader)</h2>
+					<ul>
+						<li>Linux loader</li>
+						<li>configuration</li>
+						<ul>
+							<li>/etc/lilo.conf</li>
+						</ul>
+						<li>installation</li>
+						<ul>
+							<li>lilo</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+					<h2>Boot Manager: GRUB( <strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader )</h2>
+					<ul>
+						<li>Grand Unified Bootloader</li>
+						<li>configuration</li>
+						<ul>
+							<li>grub.conf</li>
+							<ul>
+								<li>Naming convention: (hd0,0)</li>
+							</ul>
+						</ul>
+						<li>installation</li>
+						<ul>
+							<li>grub-install</li>
+						</ul>
+					</ul>
+				</section>
+				<section>
+					<h1>THE END</h1>
+					<h3>BY Narayanaperumal Gurusamy / gnperumal@gmail.com</h3>
+				</section>
+				<section>
+					<h1>Unit 2</h1>
+					<ul>
+						<li>yum</li>
+						<li>network access</li>
+						<li>webserver</li>
+					</ul>
+				</section>
+				<section>
+					<h2> <strong>Y</strong>ellowdog <strong>U</strong>pdater <strong>M</strong>odified</h2>
+					<ul>
+						<li>Based on Redhat package manager</li>
+						<li>Configuration: /etc/yum.repos.d</li>
+						<li></li>
+					</ul>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/lib/js/head.min.js"></script>
+		<script src="../reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'zoom', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
