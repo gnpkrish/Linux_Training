@@ -46,206 +46,132 @@
 				</section>
 
 				<section>
-					<h2>Unix System Administration</h2>
+					<h2>Software Installation and Web server setup</h2>
 					<h3>Unit 2:</h3>
 					<ul>
-						<li>Linux OS structure</li>
-						<li>Hardware inventory</li>
-						<li>Disks and partitions</li>
-						<li>Installation steps</li>
-						<li>Boot loader</li>	
+						<li>yum</li>
+						<li>Network Access</li>
+						<li>Webserver</li>
 					</ul>
 				</section>
 				<section>
-					<h2>Linux Distribution</h2>
-					<img src="../img/ld.png">
+					<h2>Yellowdog Updater Modified</h2>
+					<ul>
+						<li>Based on Redhat package manager</li>
+						<ul>
+							<li>uses rpm files</li>
+							<li>downloads rpm files from repositories</li>
+						</ul>
+					</ul>
+					<ul>
+						<li>Configuration: /etc/yum.repos.d</li>
+						<ul>
+							<li>default:</li>
+							<ul>
+								<li>retrieve mirror list from redhat.com</li>
+							</ul>
+						</ul>
+						<ul>
+							<li>optional:</li>
+							<ul>
+								<li>setup local fedora and fedora-updates repositories</li>
+							</ul>
+						</ul>
+					</ul>
 				</section>
 				<section>
-					<h2>Popular Linux Distributions</h2>
+					<h2>/etc/yum.repos.d</h2>
 					    <ul>
-							<li>Redhat</li>
-							<li>Fedora</li>
-							<li>Suse</li>
-							<li>Debian</li>
-							<li>Ubuntu</li>
-							<li>Mandriva</li>
-							<li>Gentoo</li>
-							<li>Slackware</li>
+							<li>fedora.repo</li>
+							<li>fedora-updates.repo</li>
 						</ul>
 				</section>
 				<section>
-					<h2>Useful Hardware Information for Installing Linux</h2>
-					    <table>
-					    	<tr>
-					    		<td>Processor</td>
-					    		<td>Pentium III 1Ghz</td>
-					    	</tr>
-					    	<tr>
-					    		<td>Memory</td>
-					    		<td>512 MB</td>
-					    	</tr>
-					    	<tr>
-					    		<td>Hard Disk</td>
-					    		<td>40 GB</td>
-					    	</tr>
-					    	<tr>
-					    		<td>Video Card</td>
-					    		<td>Intel/AMD/Nvidia</td>
-					    	</tr>
-					    	<tr>
-					    		<td>Network Card</td>
-					    		<td>Intel/Broadcom</td>
-					    	</tr>
-					    </table>
+					<h2>Yellowdog updater modified</h2>
+					    <ul>
+					    	<li>yum check-update</li>
+					    	<ul>
+					    		<li>checks for available updates</li>
+					    	</ul>
+					    	<li>yum update</li>
+					    	<ul>
+					    		<li>updates all installed packages</li>
+					    		<li>also: yum update yum</li>
+					    	</ul>
+					    	<li>yum install package-name</li>
+					    	<ul>
+					    		<li>installs new package</li>
+					    	</ul>
+					    </ul>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Overview of Linux Installation</h2>
+						<h2>Apache Webserver</h2>
 						<ul>
-							<li>Installation is started by booting from</li>
+							<li>Install with: </li>
 							<ul>
-								<li>floppy disk, CD</li>
-								<li>other bootable device: network, USB</li>
+								<li>yum install httpd</li>
 							</ul>
-							<li>Installation tasks:</li>
+							<li>Configuration file:</li>
 							<ul>
-								<li>identify source of the Linux files</li>
-								<li>answer miscellaneous questions</li>
-								<li>identify target partition(s)</li>
-								<li>define what software to install and configure</li>
-								<li>configure boot loader</li>
+								<li>/etc/httpd/conf/httpd.conf</li>
 							</ul>
-						</ul>
-					</section>
-					<section>
-						<h2>Installation sources</h2>
-						<ul>
-							<li>CD-ROM</li>
-							<li>Hard disk</li>
-							<li>Floppy disk, USB device</li>
-							<li>Network installation</li>
+							<li>Make part of run-level:</li>
 							<ul>
-								<li>ftp</li>
-								<li>http</li>
-								<li>nfs</li>
-								<li>PXE Environment</li>
+								<li>chkconfig --add httpd</li>
+								<li>chkconfig httpd on</li>
+							</ul>
+							<li>Start webserver</li>
+							<ul>
+								<li>service httpd start</li>
+							</ul>
+							<li>Configure access through firewall</li>
+							<ul>
+								<li>/etc/sysconfig/iptables</li>
 							</ul>
 						</ul>
 					</section>
 					<section>
-						<h2>Answer Questions</h2>
+						<h2>Apache Webserver...</h2>
 						<ul>
-							<li>language</li>
-							<li>keyboard</li>
-							<li>time zone</li>
-							<li>superuser password</li>
-							<li>network setup</li>
-							<li>initial firewall configuration</li>
-							<li>create initial user(s)</li>
+							<li>/etc/httpd/conf/httpd.conf</li>
+							<ul>
+								<li>Global</li>
+								<ul>
+									<li>Server root</li>
+									<li>Interface and port</li>
+								</ul>
+							</ul>
+							<ul>
+								<li>Main server:</li>
+								<ul>
+									<li>User/group</li>
+									<li>Admin, name</li>
+									<li>Document root</li>
+									<li>Userdir</li>
+									<li>Directory index and access</li>
+									<li>Logs</li>
+									<li>Cgi handling</li>
+								</ul>
+							</ul>
 						</ul>
 					</section>
-				</section>
-				<section>
-					<h2>Identify Target Partitions</h2>
-					<img src="../img/format.png">
-				</section>
-				<section>
-					<h2>Preparing Hard Disk Partitions</h2>
-					<ul>
-						<li>physical vs. logical</li>
+					<section>
+						<h2>Apache Webserver</h2>
 						<ul>
-							<li>IDE disks: /dev/hda  /dev/hdb</li>
+							<li>/etc/httpd/conf/httpd.conf</li>
 							<ul>
-								<li>partitions numbered starting with 1</li>
-								<li>example: /dev/hda1</li>
-							</ul>
-							<li>SCSI disks: /dev/sda</li>
-						</ul>
-						<li>file system vs. swap space</li>
-						<ul>
-							<li>file system type</li>
-							<li>mount point</li>
-						</ul>
-					</ul>
-				</section>
-				<section>
-					<h2>Some Target Partitions</h2>
-					<ul>
-						<li>/</li>
-						<ul>
-							<li>root file system</li>
-						</ul>
-						<li>optional: /boot</li>
-						<ul>
-							<li>for boot specific files</li>
-						</ul>
-						<li>swap space</li>
-						<ul>
-							<li>enables virtual memory</li>
-						</ul>
-						<li>/home</li>
-						<ul>
-							<li>users’ home directories</li>
-						</ul>
-					</ul>
-				</section>
-				<section>
-					<h2>Select Installation Type</h2>
-					<ul>
-						<li>personal desktop</li>
-						<li>workstation</li>
-						<li>server</li>
-						<li>custom</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Select Software Packages</h2>
-					<ul>
-						<li>GUI: X11, Gnome, KDE, lxde</li>
-						<li>editors</li>
-						<li>internet browsers and utilities</li>
-						<li>web server and utilities</li>
-						<li>developers tools</li>
-						<li>...</li>
-						<li>optional: everything</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Configuring the Boot Manager</h2>
-					<img src="../img/part.png">
-				</section>
-				<section>
-					<h2>Boot Manager: LILO (<strong>LI</strong>nux <strong>LO</strong>ader)</h2>
-					<ul>
-						<li>Linux loader</li>
-						<li>configuration</li>
-						<ul>
-							<li>/etc/lilo.conf</li>
-						</ul>
-						<li>installation</li>
-						<ul>
-							<li>lilo</li>
-						</ul>
-					</ul>
-				</section>
-				<section>
-					<h2>Boot Manager: GRUB( <strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader )</h2>
-					<ul>
-						<li>Grand Unified Bootloader</li>
-						<li>configuration</li>
-						<ul>
-							<li>grub.conf</li>
-							<ul>
-								<li>Naming convention: (hd0,0)</li>
+								<li>Virtual hosts</li>
+								<ul>
+									<li>Name</li>
+									<li>Document root</li>
+									<li>logs</li>
+								</ul>
 							</ul>
 						</ul>
-						<li>installation</li>
-						<ul>
-							<li>grub-install</li>
-						</ul>
-					</ul>
+					</section>
 				</section>
 				<section>
 					<h1>THE END</h1>
