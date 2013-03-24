@@ -49,9 +49,238 @@
 					<h2>Run Levels and Kernel Compile</h2>
 					<h3>Unit 3:</h3>
 					<ul>
+						<li>Booting Procedure</li>
 						<li>Run levels</li>
 						<li>Installing software</li>
 						<li>Modifying kernel</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Linux Booting Procedure</h2>
+					</section>
+					<section>
+						<h2>How Linux boot?</h2>
+						<img src="../img/bootpro.png">
+					</section>
+					<section>
+						<h2>How computer startup?</h2>
+						<ul>
+							<li>Booting is a bootstrapping process that starts operating systems when the user turns on a computer system</li>
+							<li>A boot sequence is the set of operations the computer performs when it is switched on that load an operating system</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Booting sequence</h2>
+						<ol>
+							<li>Turn on</li>
+							<li>CPU jump to address of BIOS (0xFFFF0)</li>
+							<li>BIOS runs POST (Power-On Self Test)</li>
+							<li>Find bootale devices</li>
+							<li>Loads and execute boot sector form MBR</li>
+							<li>Load OS</li>
+						</ol>
+					</section>
+					<section>
+						<h2>BIOS (<strong>B</strong>asic <strong>I</strong>nput/<strong>O</strong>utput <strong>S</strong>ystem)</h2>
+						<ul>
+							<li>BIOS refers to the software code run by a computer when first powered on</li>
+							<li>The primary function of BIOS is code program embedded on a chip that recognises and controls various devices that make up the computer.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>MBR (<strong>M</strong>aster <strong>B</strong>oot <strong>R</strong>ecord)</h2>
+						<ul>
+							<li>OS is booted from a hard disk, where the Master Boot Record (MBR) contains the primary boot loader</li>
+							<li>The MBR is a 512-byte sector, located in the first sector on the disk (sector 1 of cylinder 0, head 0)</li>
+							<li>After the MBR is loaded into RAM, the BIOS yields control to it.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>MBR (Master Boot Record)</h2>
+						<img src="../img/mbr.png">
+					</section>
+					<section>
+						<h2>Cont...</h2>
+						<ul>
+							<li>The first 446 bytes are the primary boot loader, which contains both executable code and error message text</li>
+							<li>The next sixty-four bytes are the partition table, which contains a record for each of four partitions</li>
+							<li>The MBR ends with two bytes that are defined as the magic number (0xAA55). The magic number serves as a validation check of the MBR</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Extracting the MBR</h2>
+						<ul>
+							<li>To see the contents of MBR, use this command:</li>
+							<pre><code>
+# dd if=/dev/hda of=mbr.bin bs=512 count=1
+# dd if=/dev/hda of=mbr.bin bs=512 count=1
+
+*** The dd command, which needs to be run from root,
+	reads the first 512 bytes from /dev/hda
+	(the first Integrated Drive Electronics, or IDE drive)
+	and writes them to the mbr.bin file.
+
+*** The od command prints the binary file in hex and ASCII formats.
+							</code></pre>
+							<li></li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Boot loader</h2>
+					<ul>
+						<li>Boot loader could be more aptly called the kernel loader. The task at this stage is to load the Linux kernel</li>
+						<li>Optional, initial RAM disk</li>
+						<li>GRUB and LILO are the most popular Linux boot loader.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Other boot loader (Several OS)</h2>
+					<ul>
+						<li>bootman</li>
+						<li>GRUB</li>
+						<li>LILO</li>
+						<li>NTLDR</li>
+						<li>XOSL</li>
+						<li>BootX</li>
+						<li>loadlin</li>
+						<li>Gujin</li>
+						<li>Boot Camp</li>
+						<li>Syslinux</li>
+						<li>GAG</li>
+					</ul>
+				</section>
+				<section>
+					<h2>GRUB: GRand Unified Bootloader</h2>
+					<ul>
+						<li>GRUB is an operating system independant boot loader</li>
+						<li>A multiboot software packet from GNU</li>
+						<li>Flexible command line interface</li>
+						<li>File system access</li>
+						<li>Support multiple executable format</li>
+						<li>Support diskless system</li>
+						<li>Download OS from network</li>
+						<li>Etc.</li>
+					</ul>
+				</section>
+				<section>
+					<h2>GRUB boot process</h2>
+					<ol>
+						<li>The BIOS finds a bootable device (hard disk) and transfers control to the master boot record </li>
+						<li>The MBR contains GRUB stage 1. Given the small size of the MBR, Stage 1 just load the next stage of GRUB</li>
+						<li>GRUB Stage 1.5 is located in the first 30 kilobytes of hard disk immediately following the MBR. Stage 1.5 loads Stage 2.</li>
+						<li>GRUB Stage 2 receives control, and displays to the user the GRUB boot menu (where the user can manually specify the boot parameters).</li>
+						<li>GRUB loads the user-selected (or default) kernel into memory and passes control on to the kernel.</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Example GRUB config file</h2>
+					<img src="../img/grub.png">
+				</section>
+				<section>
+					<h2>LILO: LInux LOader</h2>
+					<ul>
+						<li>Not depend on a specific file system</li>
+						<li>Can boot from harddisk and floppy</li>
+						<li>Up to 16 different images</li>
+						<li>Must change LILO when kernel image file or config file is changed</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Kernel image</h2>
+					<ul>
+						<li>The kernel is the central part in most computer operating systems because of its task, which is the management of the system's resources and the communication between hardware and software components</li>
+						<li>Kernel is always store on memory until computer is tern off</li>
+						<li>Kernel image is not  an executable kernel, but a compress kernel image</li>
+						<li>zImage  size less than 512 KB</li>
+						<li>bzImage size greater than 512 KB</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Task of kernel</h2>
+					<ul>
+						<li>Process management</li>
+						<li>Memory management</li>
+						<li>Device management</li>
+						<li>System call</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Major functions flow for Linux kernel boot</h2>
+					<img src="../img/kfunc.png">
+				</section>
+				<section>
+					<h2>Init process</h2>
+					<ul>
+						<li>The first thing the kernel does is to execute init program</li>
+						<li>Init is the root/parent of all processes executing on Linux</li>
+						<li>The first processes that init starts is a script /etc/rc.d/rc.sysinit</li>
+						<li>Based on the appropriate run-level, scripts are executed to start various processes to run the system and make it functional</li>
+					</ul>
+				</section>
+				<section>
+					<h2>The Linux Init Processes</h2>
+					<ul>
+						<li>The init process is identified by process id "1“</li>
+						<li>Init is responsible for starting system processes as defined in the /etc/inittab file</li>
+						<li>Init typically will start multiple instances of "getty" which waits for console logins which spawn one's user shell process</li>
+						<li>Upon shutdown, init controls the sequence and processes for shutdown</li>
+					</ul>
+				</section>
+				<section>
+					<h2>System processes </h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Process ID</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>0</strong></td>
+								<td><em>The Scheduler</em></td>
+							</tr>
+							<tr>
+								<td><strong>1</strong></td>
+								<td><em>The init process</em></td>
+							</tr>
+							<tr>
+								<td><strong>2</strong></td>
+								<td><em>kflushd</em></td>
+							</tr>
+							<tr>
+								<td><strong>3</strong></td>
+								<td><em>kupdate</em></td>
+							</tr>
+							<tr>
+								<td><strong>4</strong></td>
+								<td><em>kpiod</em></td>
+							</tr>
+							<tr>
+								<td><strong>5</strong></td>
+								<td><em>kswapd</em></td>
+							</tr>
+							<tr>
+								<td><strong>6</strong></td>
+								<td><em>mdrecoveryd</em></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Inittab file</h2>
+					<ul>
+						<li>The inittab file describes which processes are started at bootup and during normal operation</li>
+						<ul>
+							<li>/etc/init.d/boot</li>
+							<li>/etc/init.d/rc</li>
+						</ul>
+						<li>The computer will be booted to the runlevel as defined by the initdefault directive in the /etc/inittab file</li>
+						<ul>
+							<li>id:5:initdefault:</li>
+						</ul>
 					</ul>
 				</section>
 				<section>
@@ -104,104 +333,42 @@
 					</table>
 				</section>
 				<section>
-					<h2>/etc/yum.repos.d</h2>
-					    <ul>
-							<li>fedora.repo</li>
-							<PRE><CODE>
-baseurl=ftp://mirror.cs.fiu.edu/pub/mirrors/fedora/$releasever/$basearch/os
-							</CODE></PRE>
-							<li>fedora-updates.repo</li>
-							<PRE><CODE>
-baseurl=ftp://mirror.cs.fiu.edu/pub/mirrors/fedora/updates/$releasever/$basearch/
-							</CODE></PRE>
-						</ul>
+					<h2>Linux Initialization Process</h2>
+					<img src="../img/runlevel.png">
 				</section>
 				<section>
-					<h2>Yellowdog updater modified</h2>
-					    <ul>
-					    	<li>yum check-update</li>
-					    	<ul>
-					    		<li>checks for available updates</li>
-					    	</ul>
-					    	<li>yum update</li>
-					    	<ul>
-					    		<li>updates all installed packages</li>
-					    		<li>also: yum update yum</li>
-					    	</ul>
-					    	<li>yum install package-name</li>
-					    	<ul>
-					    		<li>installs new package</li>
-					    	</ul>
-					    </ul>
+					<h2>Service configuration</h2>
+					<ul>
+						<li>/etc/rc3.d or /etc/rc5.d</li>
+						<ul>
+							<li>scripts starting with S to start service</li>
+							<li>scripts starting with K to stop service</li>
+						</ul>
+						<li>/etc/init.d</li>
+						<li>chkconfig</li>
+						<ul>
+							<li>add service</li>
+							<li>turn service on/off in run level</li>
+						</ul>
+						<li>service</li>
+						<ul>
+							<li>start/stop/restart utility</li>
+						</ul>
+					</ul>
 				</section>
-
-				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Apache Webserver</h2>
+					<h2>Changing run level</h2>
+					<ul>
+						<li>init</li>
 						<ul>
-							<li>Install with: </li>
-							<ul>
-								<li>yum install httpd</li>
-							</ul>
-							<li>Configuration file:</li>
-							<ul>
-								<li>/etc/httpd/conf/httpd.conf</li>
-							</ul>
-							<li>Make part of run-level:</li>
-							<ul>
-								<li>chkconfig --add httpd</li>
-								<li>chkconfig httpd on</li>
-							</ul>
-							<li>Start webserver</li>
-							<ul>
-								<li>service httpd start</li>
-							</ul>
-							<li>Configure access through firewall</li>
-							<ul>
-								<li>/etc/sysconfig/iptables</li>
-							</ul>
+							<li>Command to change run level</li>
 						</ul>
-					</section>
-					<section>
-						<h2>Apache Webserver...</h2>
+						<li>halt, reboot</li>
+						<li>shutdown</li>
 						<ul>
-							<li>/etc/httpd/conf/httpd.conf</li>
-							<ul>
-								<li>Global</li>
-								<ul>
-									<li>Server root</li>
-									<li>Interface and port</li>
-								</ul>
-							</ul>
-							<ul>
-								<li>Main server:</li>
-								<ul>
-									<li>User/group</li>
-									<li>Admin, name</li>
-									<li>Document root</li>
-									<li>Userdir</li>
-									<li>Directory index and access</li>
-									<li>Logs</li>
-									<li>Cgi handling</li>
-								</ul>
-							</ul>
+							<li>with delay and message to users</li>
 						</ul>
-					</section>
-					<section>
-						<h2>Apache Webserver</h2>
-						<ul>
-							<li>/etc/httpd/conf/httpd.conf</li>
-							<ul>
-								<li>Virtual hosts</li>
-								<ul>
-									<li>Name</li>
-									<li>Document root</li>
-									<li>logs</li>
-								</ul>
-							</ul>
-						</ul>
-					</section>
+					</ul>
 				</section>
 				<section>
 					<h1>THE END</h1>
