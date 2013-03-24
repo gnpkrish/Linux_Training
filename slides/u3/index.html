@@ -46,38 +46,62 @@
 				</section>
 
 				<section>
-					<h2>Software Installation and Web server setup</h2>
-					<h3>Unit 2:</h3>
+					<h2>Run Levels and Kernel Compile</h2>
+					<h3>Unit 3:</h3>
 					<ul>
-						<li>yum</li>
-						<li>Network Access</li>
-						<li>Webserver</li>
+						<li>Run levels</li>
+						<li>Installing software</li>
+						<li>Modifying kernel</li>
 					</ul>
 				</section>
 				<section>
-					<h2>Yellowdog Updater Modified</h2>
-					<ul>
-						<li>Based on Redhat package manager</li>
-						<ul>
-							<li>uses rpm files</li>
-							<li>downloads rpm files from repositories</li>
-						</ul>
-					</ul>
-					<ul>
-						<li>Configuration: /etc/yum.repos.d</li>
-						<ul>
-							<li>default:</li>
-							<ul>
-								<li>retrieve mirror list from redhat.com</li>
-							</ul>
-						</ul>
-						<ul>
-							<li>optional:</li>
-							<ul>
-								<li>setup local fedora and fedora-updates repositories</li>
-							</ul>
-						</ul>
-					</ul>
+					<h2>Run Levels</h2>
+					<table style="font-size: 24px;">
+						<thead>
+							<tr>
+								<th><strong>Run Level</strong></th>
+								<th><strong>Name</strong></th>
+								<th><strong>Description</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>0</strong></td>
+								<td><em>Halt</em></td>
+								<td><p>Shuts down all services when the system will not be rebooted</p></td>
+							</tr>
+							<tr>
+								<td><strong>1</strong></td>
+								<td><em>Single-user mode</em></td>
+								<td><p>Used for system maintenance. Does not provide networking capabilites</p></td>
+							</tr>
+							<tr>
+								<td><strong>2</strong></td>
+								<td><em>Multiuser mode without networking enabled</em></td>
+								<td><p>Really used except for system maintenance or testing</p></td>
+							</tr>
+							<tr>
+								<td><strong>3</strong></td>
+								<td><em>Reqular multiuser networking mode</em></td>
+								<td><p>Standard multiuser test-mode operation. Non-graphical systems (such as network servers) Use this mode for normal operation.</p></td>
+							</tr>
+							<tr>
+								<td><strong>4</strong></td>
+								<td><em>-</em></td>
+								<td><p>Not Used.</p></td>
+							</tr>
+							<tr>
+								<td><strong>5</strong></td>
+								<td><em>Graphical login</em></td>
+								<td><p>Identical to run level 3 except a graphical login is used</p></td>
+							</tr>
+							<tr>
+								<td><strong>6</strong></td>
+								<td><em>Reboot</em></td>
+								<td><p>Shuts down all services when the system will be rebooted</p></td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 				<section>
 					<h2>/etc/yum.repos.d</h2>
